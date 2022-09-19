@@ -1,0 +1,124 @@
+/* reset css */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+a,
+a:hover,
+a:focus,
+a:visited {
+  text-decoration: none;
+  color: #141414;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.btn,
+button,
+button:focus,
+input:focus,
+textarea:focus,
+select,
+select:focus,
+a:focus {
+  outline: 0px !important;
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+button[disabled] {
+  pointer-events: none;
+}
+
+input {
+  padding: 0;
+}
+
+input:required {
+  box-shadow: none;
+}
+
+input:invalid {
+  box-shadow: none;
+}
+/* resetCSS end*/
+
+.d-none {
+  display: none;
+}
+.d-flex {
+  display: flex;
+}
+.justify-content-between {
+  justify-content: space-between;
+}
+.hidden {
+  visibility: hidden;
+}
+
+/* basic css setting*/
+:root {
+  --body-color: #fff;
+  --main-color: black;
+  --second-color: #afb1bd;
+  --underline: rgba(42, 42, 42, 0.1);
+  --step-color: black;
+  --step-text: #fff;
+  --right-content: #fff;
+  --btn-color: #f67599;
+  --plus-color: #808080;
+  --foot-color: #e5e5e5;
+}
+
+[data-theme="dark"] {
+  --body-color: black;
+  --main-color: #fff;
+  --second-color: #383838;
+  --underline: rgba(42, 42, 42, 0.1);
+  --step-color: rgba(255, 255, 255, 0.3);
+  --step-text: #fff;
+  --right-content: #383838;
+  --btn-color: #f67599;
+  --plus-color: #808080;
+  --foot-color: #333333;
+}
+
+@mixin getStepNum($num) {
+  @for $i from 1 through $num {
+    &:nth-child(#{$i}) .circle-container::after {
+      content: "#{$i}";
+    }
+  }
+}
