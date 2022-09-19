@@ -17,13 +17,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './assets/scss/reset.scss';
-
-body {
-  background-color: var(--body-color);
-  transition: 0.4s;
-}
-#app{
+  #app {
   height: 100%;
 }
 </style>

@@ -1,0 +1,126 @@
+.stepper-panel {
+  height: 2rem;
+  margin: 1rem 0px;
+  .stepper-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    & .checked .circle-container::after {
+      content: "\2714";
+    }
+  }
+  .step {
+    flex: 1;
+    color: var(--step-color);
+    .circle-container {
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid var(--step-color);
+      background-color: var(--body-color);
+      border-radius: 50%;
+      text-align: center;
+      line-height: 2rem;
+    }
+    &:nth-child(1) {
+      .connect-line {
+        display: inline-block;
+        height: 3px;
+        background-color: var(--main-color);
+        position: absolute;
+        top: 1rem;
+        width: calc(10% + 2rem);
+        left: calc(5% + 2rem);
+      }
+    }
+    &:nth-child(2) {
+      & .circle-container {
+        position: relative;
+        margin: 0 auto;
+        z-index: 5;
+        background-color: var(--body-color);
+      }
+      &.checked ~ .step .connect-line,
+      &.active ~ .step .connect-line {
+        background-color: var(--main-color);
+      }
+    }
+    &:nth-child(3) {
+      .circle-container {
+        position: relative;
+        left: 100%;
+        transform: translateX(-100%);
+      }
+      .connect-line {
+        display: inline-block;
+        height: 3px;
+        background-color: var(--step-color);
+        position: absolute;
+        top: 1rem;
+        width: calc(10% + 2rem);
+        right: calc(5% + 2rem);
+      }
+    }
+    &.checked > .circle-container,
+    &.active > .circle-container {
+      background-color: var(--step-color);
+      color: var(--step-text);
+    }
+  }
+  .step-title {
+    display: none;
+  }
+}
+
+.step {
+  @include getStepNum(3);
+}
+
+@media screen and (min-width: 375px) {
+  .stepper-panel {
+    .stepper-container {
+      position: relative;
+    }
+    .step {
+      flex: unset;
+      display: flex;
+      align-items: center;
+      z-index: 5;
+      color: var(--second-color);
+      &:nth-child(1) {
+        .connect-line {
+          width: calc(10% + 1rem);
+          left: calc(20% + 1rem);
+        }
+      }
+      &:nth-child(2) {
+        margin: 0 auto;
+        .circle-container {
+          margin: unset;
+          border: 1px solid var(--second-color);
+        }
+      }
+      &:nth-child(3) {
+        .circle-container {
+          position: unset;
+          transform: unset;
+          border: 1px solid var(--second-color);
+        }
+        .connect-line {
+          width: calc(10% + 1rem);
+          right: calc(20% + 1rem);
+          background-color: var(--second-color);
+        }
+      }
+    }
+    .step-title {
+      display: unset;
+      margin-left: 0.5rem;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    .checked > .step-title,
+    .active > .step-title {
+      color: var(--main-color);
+    }
+  }
+}

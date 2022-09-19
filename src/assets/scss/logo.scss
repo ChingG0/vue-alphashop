@@ -1,0 +1,15 @@
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  .logo-img {
+    margin: auto 10px auto 0px;
+    width: 2rem;
+    height: 2rem;
+  }
+  .logo-text {
+    font-size: 1.5rem;
+    color: var(--main-color);
+  }
+}

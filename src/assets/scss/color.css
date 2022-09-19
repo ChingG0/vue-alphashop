@@ -1,0 +1,26 @@
+/* basic css setting*/
+:root {
+  --body-color: #fff;
+  --main-color: black;
+  --second-color: #afb1bd;
+  --underline: rgba(42, 42, 42, 0.1);
+  --step-color: black;
+  --step-text: #fff;
+  --right-content: #fff;
+  --btn-color: #f67599;
+  --plus-color: #808080;
+  --foot-color: #e5e5e5;
+}
+
+[data-theme="dark"] {
+  --body-color: black;
+  --main-color: #fff;
+  --second-color: #383838;
+  --underline: rgba(42, 42, 42, 0.1);
+  --step-color: rgba(255, 255, 255, 0.3);
+  --step-text: #fff;
+  --right-content: #383838;
+  --btn-color: #f67599;
+  --plus-color: #808080;
+  --foot-color: #333333;
+}
