@@ -4,9 +4,9 @@
     <div class="main-container">
       <div class="left-container checkout">
         <StepControlThree />
-        <CheckoutPayment/>
+        <CheckoutPayment />
       </div>
-      <ShopCart :initProducts = "products" :initFee = "deliveryFee" :initTotal="total"/>
+      <ShopCart :initProducts="products" :initFee="deliveryFee" :initTotal="total" />
     </div>
     <Footer />
   </div>
@@ -18,6 +18,7 @@ import ShopCart from "../components/ShopCart.vue";
 import Footer from "../components/Footer.vue";
 import StepControlThree from "../components/StepControlThree.vue";
 import CheckoutPayment from "../components/CheckoutThree/CheckoutPayment.vue";
+
 export default {
   components: {
     CheckOutTitle,
@@ -33,11 +34,11 @@ export default {
       total: 0
     }
   },
-  created(){
-      this.products = JSON.parse(localStorage.getItem('products'))
-      this.deliveryFee = JSON.parse(localStorage.getItem('deliveryFee'))
-      this.total =JSON.parse(localStorage.getItem('total'))
-      this.products.forEach(product=>product.total = product.price*product.quantity)
+  created() {
+    this.products = JSON.parse(localStorage.getItem('products'))
+    this.deliveryFee = JSON.parse(localStorage.getItem('deliveryFee'))
+    this.total = JSON.parse(localStorage.getItem('total'))
+    this.products.forEach(product => product.total = product.price * product.quantity)
   }
 }
 </script>

@@ -112,7 +112,7 @@ export default {
       const { titles, Citys } = dummyData
       this.titles = titles
       this.Citys = Citys
-      this.info = JSON.parse(localStorage.getItem('info'))
+      this.info = JSON.parse(localStorage.getItem('info')|| [])
     },
     handleSubmit() {
       localStorage.setItem('info',JSON.stringify(this.info))

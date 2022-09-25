@@ -52,13 +52,7 @@ export default {
       }
     }
   },
-  created() {
-    this.fetchData()
-  },
   methods: {
-    fetchData(){
-      this.paymentInfo = JSON.parse(localStorage.getItem('paymentInfo'))
-    },
     handleSubmit(){
       console.log(localStorage.info)
       console.log(localStorage.products)
