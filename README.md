@@ -1,24 +1,11 @@
-# alphashop
+這是使用vue2開發的購物車網頁
 
-## Project setup
-```
+請先用git clone 此網址
+
+載入一些npm 套件
 npm install
-```
 
-### Compiles and hot-reloads for development
-```
+讓專案在web顯示, 開啟terminal 並輸入
 npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+複製terminal 網址, 就可以囉！
