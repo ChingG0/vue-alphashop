@@ -44,5 +44,5 @@
 <style lang="scss" scoped>
   @import '../assets/scss/reset';
   @import '../assets/scss/footer.scss';
-  @import '../assets/scss/logo.scss';
+  @import '../assets/scss/CheckoutStyle/logo.scss';
 </style>

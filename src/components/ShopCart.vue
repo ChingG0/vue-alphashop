@@ -2,40 +2,28 @@
   <div class="right-container cart">
     <div class="cart-container">
       <h2>購物籃</h2>
-      <div class="cart-row">
-        <img
-          src="https://s3-alpha-sig.figma.com/img/15f2/959d/447065f70fcdd4bf7fef35c5a33a00fa?Expires=1664755200&Signature=ITT~OkUIzfyMF-gkIuw0RqMwCVex6henGjFbmwOIeRjz8q-QM1pkHkBaOho~vYbL5czakoqtvIjY6sn5irGBTfMKvU5Yf-4zazvMk2ceq16m9FwzC-D9lDYhPswecXZxHUSn5RPbUfXlA-5J4bS1pelnDGSsYiUkw~t8g5XTkFg09PCxJginTgvgAlNRnTf~T8HVsuxpIkz8v~u3YY98ElSvKeLWb891l~woOJXMTlTC4efd8AgkyP4QFpuPaaAcq09LSbNjuA6Xak7nXDYHRIziz7RK2qM6mee6dmw0YKAalT0kjjqxbJ41Zt9kVGixUJ2JIuhtxQjfLkp-HTDgdQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-          alt="">
+      <div class="cart-row" v-for="product in products" :key="product.id">
+        <img :src="product.image" alt="">
         <div class="cart-info">
           <div class="cart-item">
-            <h3>破壞補丁修身牛仔褲</h3>
-            <h4 class="item-price">$3,999</h4>
+            <h3>{{product.name}}</h3>
+            <h4 class="item-price">{{product.total | tenPercentile}}</h4>
           </div>
-          <div class="item-amount"><i class="fa-solid fa-minus"></i>1<i class="fa-solid fa-plus"></i></div>
-        </div>
-      </div>
-      <div class="cart-row">
-        <img
-          src="https://s3-alpha-sig.figma.com/img/4d21/00d2/8b521840bb4e7237b342e63cb39c6a72?Expires=1664755200&Signature=DQDV8Eg6ukDDIm3l3A7V5mHqHBGliTx-p6-YyZobEoDNh1ukK1YQIyPhtsEJn3wgaP7cxKIByQtSU~~Zjg6f~BVZErq44F8nG7iDU08Of42mamyLbCV-NpGf326nRhAzEi9PjC68aDjpkiQ3g-fpl3xuaa1D4iemTT~oVEtW8SpNL7Uyt5-MEoXunJcPuhRZZMEUdtuqy-oLWQq5mghY6BRIW0NxMMrctpxr2vFagE2mg1cZ01Q1UlN0ZU61gAlZzQbeH~wf8ad3W01AkwUhDW62Ub-HDTWBePms1xDhSjWKTQrkUe3J3x2UP5MU038KJEfDRUeuZjxOShuXKmxFDA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-          alt="">
-        <div class="cart-info">
-          <div class="cart-item">
-            <h3>刷色直筒牛仔褲</h3>
-            <h4 class="item-price">$1,299</h4>
-          </div>
-          <div class="item-amount"><i class="fa-solid fa-minus"></i>1<i class="fa-solid fa-plus"></i></div>
+          <div class="item-amount"><i class="fa-solid fa-minus"
+              @click.prevent.stop="minusQuan(product)"></i>{{product.quantity}}<i class="fa-solid fa-plus"
+              @click.prevent.stop="plusQuan(product)"></i></div>
         </div>
       </div>
       <div class="cart-row">
         <div class="shipping">
           <h4>運費</h4>
-          <h4 class="fee">免費</h4>
+          <h4 class="fee">{{deliveryFee}}</h4>
         </div>
       </div>
       <div class="cart-row">
         <div class="total">
           <h4>小計</h4>
-          <h4 class="total-price">$5,298</h4>
+          <h4 class="total-price">{{total}}</h4>
         </div>
       </div>
     </div>
@@ -43,11 +31,83 @@
 </template>
 
 <script>
+import PubSub from 'pubsub-js';
 export default {
+  props: {
+    initProducts: {
+      type: Array,
+      require: true
+    },
+    initFee: {
+      value: [Number, String],
+    },
+    initTotal: {
+      type: Number,
+    }
+  },
+  data() {
+    return {
+      products: [],
+      deliveryFee: this.initFee? this.initFee : 0,
+      total: 0
+    }
+  },
+  created() {
+    this.fetchData()
+    this.products.forEach(product=>product.total = product.price*product.quantity)
+  },
+  mounted() {
+    PubSub.subscribe('deliveryFee', (msg, fee) => {
+      this.deliveryFee = fee
+    })
+  },
+  methods: {
+    fetchData() {
+      this.products = this.initProducts
+      this.total = this.initTotal
+    },
+    minusQuan(product) {
+      product.quantity > 0 ? product.quantity-- : 0
+      product.total = product.price * product.quantity
+    },
+    plusQuan(product) {
+      product.quantity++
+      product.total = product.price * product.quantity
+    },
+    calcTotal(){
+      this.total = this.products.map(product=>product.total).reduce((acc,current)=>{return acc+current})+Number(this.deliveryFee)
+    },
+    saveProducts(){
+      localStorage.setItem('products',JSON.stringify(this.products))
+      localStorage.setItem('deliveryFee',JSON.stringify(this.deliveryFee))
+      localStorage.setItem('total',JSON.stringify(this.total))
+    }
+  },
+  watch: {
+    products: {
+      handler: function () {
+        this.calcTotal()
+        this.saveProducts()
+      },
+      deep: true
+    },
+    deliveryFee: {
+      handler: function () {
+        this.calcTotal()
+        this.saveProducts()
+      },
+      deep: true
+    }
+  },
+  filters: {
+    tenPercentile(n) {
+      return `$${n.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}`;
+    }
+  }
 
 }
 </script>
 <style lang="scss" scoped>
 @import '../assets/scss/reset.scss';
-@import '../assets/scss/rightContainer.scss'
+@import '../assets/scss/CheckoutStyle/rightContainer.scss'
 </style>

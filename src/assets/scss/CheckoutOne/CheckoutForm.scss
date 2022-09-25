@@ -76,69 +76,6 @@
 
     color: var(--main-color);
   }
-
-  /* form2 */
-  .delivery-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .delivery {
-    border: 2px solid var(--second-color);
-    border-radius: 4px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    color: var(--main-color);
-
-    & input {
-      all: unset;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      border: 1px solid var(--main-color);
-      margin: 26px;
-
-      &:checked {
-        box-shadow: inset 0 0 0 5px var(--main-color);
-      }
-    }
-
-    &:hover {
-      border: 2px solid var(--main-color);
-    }
-
-    .delivery-info {
-      flex: 1;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .delivery-fee {
-      margin-right: 26px;
-    }
-
-    &:nth-child(2) {
-      margin-top: 24px;
-    }
-  }
-
-  /* form3 */
-  .part:nth-child(3) .form-card-name,
-  .form-card-number {
-    width: 100%;
-  }
-
-  .card-date {
-    width: 45%;
-    margin-right: 30px;
-  }
-
-  .card-cvc {
-    flex: 1;
-  }
 }
 
 @media screen and (min-width: 375px) {
@@ -171,16 +108,6 @@
         width: 50%;
         margin-right: 30px;
       }
-    }
-
-    /* form2 */
-    .delivery {
-      width: 80%;
-    }
-
-    /* form3 */
-    .part:nth-child(3) .form-row {
-      width: 100%;
     }
   }
 }

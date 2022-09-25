@@ -68,5 +68,5 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/scss/reset.scss';
 @import '../assets/scss/navbar.scss';
-@import '../assets/scss/logo.scss';
+@import '../assets/scss/CheckoutStyle/logo.scss';
 </style>

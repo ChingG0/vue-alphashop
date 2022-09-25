@@ -1,0 +1,42 @@
+.control-panel {
+  position: absolute;
+  width: 100%;
+  bottom: -24px;
+  transform: translateY(20px);
+  border-top: 1px solid var(--seond-color);
+  .btn {
+    &:nth-child(1) {
+      color: var(--main-color);
+      &::before {
+        position: relative;
+        margin-right: 12.5px;
+        content: "\2190";
+        color: var(--main-color);
+      }
+    }
+    &:nth-child(2) {
+      outline: 1px solid tomato;
+      width: 156px;
+      height: 46px;
+      background-color: var(--btn-color);
+      font-size: 1rem;
+      color: var(--step-text);
+      border-radius: 8px;
+    }
+  }
+}
+@media screen and (min-width: 375px){
+  .control-panel {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    .btn {
+      &:nth-child(1) {
+        outline: 1px solid tomato;
+        font-size: 1.2rem;
+        color: var(--main-color);
+      }
+    }
+  }
+}
